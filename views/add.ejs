@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Joke</title>
+  <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- ============== Box icons ================ -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='https://cdn.boxicons.com/3.0.3/fonts/basic/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+
+  <nav class="navbar">
+  <a href="/" class="logo">😂 JokesApp</a>
+
+  <div class="nav-right">
+    <% if (userId) { %>
+      <form method="POST" action="/logout">
+        <button class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </form>
+    <% } else { %>
+      <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="/register"><i class="fas fa-user-plus"></i> Register</a>
+    <% } %>
+  </div>
+</nav>
+
+
+  <h1>  Add a Joke  <i class="bx bx-happy"></i></h1>
+  
+
+  <form method="POST" action="/add">
+  <input type="text" name="joke" placeholder="Enter your joke" required />
+
+  <select name="category_id" required class="styled-select">
+    <option value="">Select category</option>
+    <% if (categories && categories.length > 0) { %>
+      <% categories.forEach(c => { %>
+        <option value="<%= c.id %>"><%= c.name %></option>
+      <% }) %>
+    <% } %>
+  </select>
+
+  <button type="submit" class="add-btn">
+    <i class="fas fa-plus-square"></i> Add
+  </button>
+</form>
+
+
+  
+
+  <a href="/"> Back <i class="bx bx-home-alt"></i></a>
+</body>
+</html>

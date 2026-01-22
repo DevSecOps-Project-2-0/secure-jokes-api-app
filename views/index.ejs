@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jokes</title>
+  <link rel="stylesheet" href="/style.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const updateVotes = async (btn, type) => {
+    const id = btn.dataset.id;
+    try {
+      const res = await fetch(`/${type}/${id}`, { method: "POST" });
+      if (res.ok) {
+        const data = await res.json();
+        const joke = document.getElementById(`joke-${id}`);
+        joke.querySelector(".like-count").innerText = data.likes;
+        joke.querySelector(".dislike-count").innerText = data.dislikes;
+      } else if (res.status === 401) {
+          alert("Please log in to vote");
+        }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  document.querySelectorAll(".like-btn").forEach(btn => {
+    btn.addEventListener("click", () => updateVotes(btn, "like"));
+  });
+
+  document.querySelectorAll(".dislike-btn").forEach(btn => {
+    btn.addEventListener("click", () => updateVotes(btn, "dislike"));
+  });
+});
+</script>
+
+
+
+
+<body>
+
+  <nav class="navbar">
+  <a href="/" class="logo">😂 JOKES</a>
+
+
+
+<% if (userRole === 'admin') { %>
+  <a href="/admin" class="admin-link">
+    <i class="fas fa-shield-alt"></i> Admin
+  </a>
+<% } %>
+ 
+  
+<% if (userId && username) { %>
+  <div class="nav-user">
+    <div class="avatar-circle">
+      <%= avatar %>
+    </div>
+
+    <span class="nav-username">
+      Hi, <strong><%= username %></strong>
+    </span>
+
+    <form method="POST" action="/logout">
+      <button class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </form>
+  </div>
+<% } else { %>
+    <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+    <a href="/register"><i class="fas fa-user-plus"></i> Register</a>
+  <% } %>
+
+</nav>
+
+
+  <h1>😂 All Jokes</h1>
+
+  <div class="category-filters">
+  <a href="/" class="<%= !activeCategory ? 'active' : '' %>">
+    All
+  </a>
+
+  <% categories.forEach(c => { %>
+    <a
+      href="/category/<%= c.name %>"
+      class="<%= activeCategory === c.name ? 'active' : '' %>"
+    >
+      <%= c.name %>
+    </a>
+  <% }) %>
+</div>
+
+<form method="GET" action="/search" class="search-form">
+  <input
+    type="text"
+    name="q"
+    placeholder="Search jokes..."
+    value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
+  />
+
+  <select name="category" class="styled-select">
+    <option value="">All Categories</option>
+    <% categories.forEach(c => { %>
+      <option value="<%= c.name %>" <%= activeCategory === c.name ? "selected" : "" %>>
+        <%= c.name %>
+      </option>
+      <% if (categories && categories.length > 0) { %>
+  <% categories.forEach(c => { %>
+    <a href="/search?category=<%= c.name %>" class="<%= activeCategory === c.name ? 'active' : '' %>">
+      <%= c.name %>
+    </a>
+  <% }) %>
+<% } %>
+
+    <% }) %>
+  </select>
+
+  <button type="submit"><i class="fas fa-search"></i> Search</button>
+</form>
+
+<a href="/random">🎲 Random Joke</a>
+  <a href="/add"><i class="fas fa-plus-square"></i> Add Joke</a>
+
+
+  <ul>
+  <% jokes.forEach(j => { %>
+    <li>
+      <p><%= j.joke %></p>
+      <span class="badge"><%= j.category %></span>
+
+      <% if (userRole === 'admin') { %>
+  <form method="POST" action="/delete/<%= j.id %>" style="display:inline;">
+    <button type="submit" class="delete-btn">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  </form>
+<% } %>
+
+
+      <div class="joke-item" id="joke-<%= j.id %>">
+      <p><%= j.text %></p>
+
+  <button class="like-btn" data-id="<%= j.id %>">
+    <i class="fas fa-thumbs-up"></i>
+    <span class="like-count"><%= j.likes %></span>
+  </button>
+
+  <button class="dislike-btn" data-id="<%= j.id %>">
+    <i class="fas fa-thumbs-down"></i>
+    <span class="dislike-count"><%= j.dislikes %></span>
+  </button>
+</div>
+
+
+<% if (jokes.length === 0) { %>
+  <p class="empty-state">No jokes found for your search 😢</p>
+<% } %>
+
+
+    </li>
+  <% }) %>
+  <% if (jokes.length === 0) { %>
+  <p class="empty-state">
+    No jokes found for this category 😢
+  </p>
+<% } %>
+
+</ul>
+
+
+  <% if (userId) { %>
+  <!-- like / dislike buttons -->
+  <% } else { %>
+    <p><a href="/login"><i class="fas fa-sign-in-alt"></i> Login to vote</a></p>
+  <% } %>
+
+</body>
+</html>
+
