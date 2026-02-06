@@ -1,9 +1,10 @@
 ## 🐞 Issue Description
+
 Clearly and concisely describe the issue.
 
----
 
-## 🔍 Steps to Reproduce
+
+##  Steps to Reproduce
 Steps to reproduce the behavior:
 
 1. Go to '...'
@@ -11,19 +12,21 @@ Steps to reproduce the behavior:
 3. Submit '...'
 4. See error
 
----
 
-## ✅ Expected Behavior
+
+##  Expected Behavior
 Describe what you expected to happen.
 
----
 
-## ❌ Actual Behavior
+
+##  Actual Behavior
+
 Describe what actually happened.
 
----
 
-## 🖥 Environment
+
+##  Environment
+
 Please complete the following information:
 
 - OS: (e.g. Windows, macOS, Linux)
@@ -31,27 +34,23 @@ Please complete the following information:
 - PostgreSQL version:
 - Browser (if applicable):
 
----
 
-## 📸 Screenshots / Logs (if applicable)
+
+##  Screenshots / Logs (if applicable)
+
 Add screenshots, error logs, or console output to help explain the problem.
 
----
 
-## 🔐 Security Impact
+
+##  Security Impact
+
 - [ ] No security impact
 - [ ] Possible security concern (explain below)
 
 If yes, explain:
 
----
 
-## 📋 Additional Context
-Add any other context about the problem here.
-
----
-
-## ✅ Checklist
+##  Checklist
 - [ ] I have searched existing issues
 - [ ] I can reproduce this issue
 - [ ] This issue is related to this repository
