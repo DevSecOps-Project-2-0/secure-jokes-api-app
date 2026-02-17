@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nodejs-app
+  labels:
+    app: nodejs-app
+spec:
+  containers:
+  - name: nodejs-app
+    image: evamecobblah/myapp:latest
+    ports:
+    - containerPort: 5000
+    env:
+      - name: DB_HOST
+        value: postgres
+      - name: DB_USER
+        value: jokesuser
+      - name: DB_PASSWORD
+        value: admin@223
+      - name: DB_NAME
+        value: jokesdb
