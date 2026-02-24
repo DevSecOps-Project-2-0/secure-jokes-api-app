@@ -1,19 +1,40 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: postgres-db
   labels:
     app: postgres-db
 spec:
-  containers:
-  - name: postgres
-    image: evamecobblah/postgres:v1
-    ports:
-    - containerPort: 5432
-    env:
-    - name: POSTGRES_USER
-      value: jokesuser
-    - name: POSTGRES_PASSWORD
-      value: admin@223
-    - name: POSTGRES_DB
-      value: jokesdb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-db
+  template:
+    metadata:
+      labels:
+        app: postgres-db
+    spec:
+      initContainers:
+        - name: busybox
+          image: busybox:latest
+          command: ["sh", "-c", "rm -rf /var/lib/postgresql/data/lost+found"]
+          volumeMounts:
+            - name: jokesdb-data
+              mountPath: /var/lib/postgresql/data
+
+      containers:
+        - name: postgres
+          image: evamecobblah/postgres:v1
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: jokesdb-data
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
+
+      volumes:
+        - name: jokesdb-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc

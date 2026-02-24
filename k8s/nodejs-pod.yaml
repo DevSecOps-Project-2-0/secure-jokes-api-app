@@ -1,21 +1,52 @@
 apiVersion: v1
-kind: Pod
+kind: ConfigMap
+metadata: 
+  name: app-config
+data: 
+  DB_HOST: 'postgres'
+  DB_NAME: 'jokesdb'
+
+---
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: nodejs-app
   labels:
     app: nodejs-app
 spec:
-  containers:
-  - name: nodejs-app
-    image: evamecobblah/myapp:latest
-    ports:
-    - containerPort: 5000
-    env:
-      - name: DB_HOST
-        value: postgres
-      - name: DB_USER
-        value: jokesuser
-      - name: DB_PASSWORD
-        value: admin@223
-      - name: DB_NAME
-        value: jokesdb
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodejs-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+    spec: 
+      containers:
+      - name: nodejs-app
+        image: evamecobblah/myapp:latest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: app-config
+        env: 
+        - name: DB_USER
+          valueFrom: 
+            secretKeyRef: 
+              name: nodejs-secrets
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom: 
+            secretKeyRef: 
+              name: nodejs-secrets
+              key: DB_PASSWORD
+        resources: 
+          limits:
+            memory: '128Mi'
+            cpu: '500m'
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup postgres.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
