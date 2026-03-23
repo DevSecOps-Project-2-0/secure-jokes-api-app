@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-db
+  labels:
+    app: postgres-db
+spec:
+  replicas: {{ .Values.db.replicaCount }}
+  selector:
+    matchLabels:
+      app: postgres-db
+  template:
+    metadata:
+      labels:
+        app: postgres-db
+    spec:
+      initContainers:
+        - name: busybox
+          image: busybox:latest
+          command: ["sh", "-c", "rm -rf /var/lib/postgresql/data/lost+found"]
+          volumeMounts:
+            - name: jokesdb-data
+              mountPath: /var/lib/postgresql/data
+
+      containers:
+        - name: postgres
+          image: {{ .Values.db.image.repository }}:{{ .Values.db.image.tag }}
+          ports:
+            - containerPort: {{ .Values.db.container.port }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: jokesdb-data
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
+
+      volumes:
+        - name: jokesdb-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
