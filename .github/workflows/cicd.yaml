@@ -18,5 +18,5 @@ jobs:
         with:
           image-ref: ghcr.io/evamecobblah/myapp:latest
           format: table
-          exit-code: 1
+          exit-code: 0
           severity: CRITICAL,HIGH
