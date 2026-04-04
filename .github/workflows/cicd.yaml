@@ -13,5 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Trivy
-        run: trivy image evamecobblah/myapp:latest
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: evamecobblah/myapp:latest
+          exit-code: '1'
+          format: 'table'
