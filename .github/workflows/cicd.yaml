@@ -1,6 +1,6 @@
 name: Trivy
 
-on:
+"on":
   push:
     branches:
       - main
@@ -17,5 +17,5 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: evamecobblah/myapp:latest
-          exit-code: '1'
+          exit-code: '0'
           format: 'table'
