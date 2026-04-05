@@ -16,7 +16,7 @@ jobs:
       - name: Scan image from registry
         uses: aquasecurity/trivy-action@v0.20.0
         with:
-          image-ref: ghcr.io/evamecobblah/myapp:latest
+          image-ref: docker.io/evamecobblah/myapp:latest
           format: table
           exit-code: 0
           severity: CRITICAL,HIGH

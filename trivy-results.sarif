@@ -1,0 +1,362 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "fullName": "Trivy Vulnerability Scanner",
+          "informationUri": "https://github.com/aquasecurity/trivy",
+          "name": "Trivy",
+          "rules": [
+            {
+              "id": "CVE-2026-33750",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "brace-expansion: brace-expansion: Denial of Service via zero step value in brace pattern"
+              },
+              "fullDescription": {
+                "text": "The brace-expansion library generates arbitrary strings containing a common prefix and suffix. Prior to versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13, a brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory. Versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13 fix the issue. As a workaround, sanitize strings passed to `expand()` to ensure a step value of `0` is not used."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2026-33750",
+              "help": {
+                "text": "Vulnerability CVE-2026-33750\nSeverity: MEDIUM\nPackage: brace-expansion\nFixed Version: 5.0.5, 3.0.2, 2.0.3, 1.1.13\nLink: [CVE-2026-33750](https://avd.aquasec.com/nvd/cve-2026-33750)\nThe brace-expansion library generates arbitrary strings containing a common prefix and suffix. Prior to versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13, a brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory. Versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13 fix the issue. As a workaround, sanitize strings passed to `expand()` to ensure a step value of `0` is not used.",
+                "markdown": "**Vulnerability CVE-2026-33750**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|MEDIUM|brace-expansion|5.0.5, 3.0.2, 2.0.3, 1.1.13|[CVE-2026-33750](https://avd.aquasec.com/nvd/cve-2026-33750)|\n\nThe brace-expansion library generates arbitrary strings containing a common prefix and suffix. Prior to versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13, a brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory. Versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13 fix the issue. As a workaround, sanitize strings passed to `expand()` to ensure a step value of `0` is not used."
+              },
+              "properties": {
+                "cvssv3_baseScore": 6.5,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+                "precision": "very-high",
+                "security-severity": "6.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "MEDIUM"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2026-26996",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "minimatch: minimatch: Denial of Service via specially crafted glob patterns"
+              },
+              "fullDescription": {
+                "text": "minimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Versions 10.2.0 and below are vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive * wildcards followed by a literal character that doesn't appear in the test string. Each * compiles to a separate [^/]*? regex group, and when the match fails, V8's regex engine backtracks exponentially across all possible splits. The time complexity is O(4^N) where N is the number of * characters. With N=15, a single minimatch() call takes ~2 seconds. With N=34, it hangs effectively forever. Any application that passes user-controlled strings to minimatch() as the pattern argument is vulnerable to DoS. This issue has been fixed in version 10.2.1."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2026-26996",
+              "help": {
+                "text": "Vulnerability CVE-2026-26996\nSeverity: HIGH\nPackage: minimatch\nFixed Version: 10.2.1, 9.0.6, 8.0.5, 7.4.7, 6.2.1, 5.1.7, 4.2.4, 3.1.3\nLink: [CVE-2026-26996](https://avd.aquasec.com/nvd/cve-2026-26996)\nminimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Versions 10.2.0 and below are vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive * wildcards followed by a literal character that doesn't appear in the test string. Each * compiles to a separate [^/]*? regex group, and when the match fails, V8's regex engine backtracks exponentially across all possible splits. The time complexity is O(4^N) where N is the number of * characters. With N=15, a single minimatch() call takes ~2 seconds. With N=34, it hangs effectively forever. Any application that passes user-controlled strings to minimatch() as the pattern argument is vulnerable to DoS. This issue has been fixed in version 10.2.1.",
+                "markdown": "**Vulnerability CVE-2026-26996**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|minimatch|10.2.1, 9.0.6, 8.0.5, 7.4.7, 6.2.1, 5.1.7, 4.2.4, 3.1.3|[CVE-2026-26996](https://avd.aquasec.com/nvd/cve-2026-26996)|\n\nminimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Versions 10.2.0 and below are vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive * wildcards followed by a literal character that doesn't appear in the test string. Each * compiles to a separate [^/]*? regex group, and when the match fails, V8's regex engine backtracks exponentially across all possible splits. The time complexity is O(4^N) where N is the number of * characters. With N=15, a single minimatch() call takes ~2 seconds. With N=34, it hangs effectively forever. Any application that passes user-controlled strings to minimatch() as the pattern argument is vulnerable to DoS. This issue has been fixed in version 10.2.1."
+              },
+              "properties": {
+                "cvssv40_baseScore": 8.7,
+                "cvssv40_vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+                "precision": "very-high",
+                "security-severity": "8.0",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2026-27903",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "minimatch: minimatch: Denial of Service due to unbounded recursive backtracking via crafted glob patterns"
+              },
+              "fullDescription": {
+                "text": "minimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3, `matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity is O(C(n, k)) -- binomial -- where `n` is the number of path segments and `k` is the number of globstars. With k=11 and n=30, a call to the default `minimatch()` API stalls for roughly 5 seconds. With k=13, it exceeds 15 seconds. No memoization or call budget exists to bound this behavior. Any application where an attacker can influence the glob pattern passed to `minimatch()` is vulnerable. The realistic attack surface includes build tools and task runners that accept user-supplied glob arguments (ESLint, Webpack, Rollup config), multi-tenant systems where one tenant configures glob-based rules that run in a shared process, admin or developer interfaces that accept ignore-rule or filter configuration as globs, and CI/CD pipelines that evaluate user-submitted config files containing glob patterns. An attacker who can place a crafted pattern into any of these paths can stall the Node.js event loop for tens of seconds per invocation. The pattern is 56 bytes for a 5-second stall and does not require authentication in contexts where pattern input is part of the feature. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3 fix the issue."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2026-27903",
+              "help": {
+                "text": "Vulnerability CVE-2026-27903\nSeverity: HIGH\nPackage: minimatch\nFixed Version: 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.3\nLink: [CVE-2026-27903](https://avd.aquasec.com/nvd/cve-2026-27903)\nminimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3, `matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity is O(C(n, k)) -- binomial -- where `n` is the number of path segments and `k` is the number of globstars. With k=11 and n=30, a call to the default `minimatch()` API stalls for roughly 5 seconds. With k=13, it exceeds 15 seconds. No memoization or call budget exists to bound this behavior. Any application where an attacker can influence the glob pattern passed to `minimatch()` is vulnerable. The realistic attack surface includes build tools and task runners that accept user-supplied glob arguments (ESLint, Webpack, Rollup config), multi-tenant systems where one tenant configures glob-based rules that run in a shared process, admin or developer interfaces that accept ignore-rule or filter configuration as globs, and CI/CD pipelines that evaluate user-submitted config files containing glob patterns. An attacker who can place a crafted pattern into any of these paths can stall the Node.js event loop for tens of seconds per invocation. The pattern is 56 bytes for a 5-second stall and does not require authentication in contexts where pattern input is part of the feature. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3 fix the issue.",
+                "markdown": "**Vulnerability CVE-2026-27903**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|minimatch|10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.3|[CVE-2026-27903](https://avd.aquasec.com/nvd/cve-2026-27903)|\n\nminimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3, `matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity is O(C(n, k)) -- binomial -- where `n` is the number of path segments and `k` is the number of globstars. With k=11 and n=30, a call to the default `minimatch()` API stalls for roughly 5 seconds. With k=13, it exceeds 15 seconds. No memoization or call budget exists to bound this behavior. Any application where an attacker can influence the glob pattern passed to `minimatch()` is vulnerable. The realistic attack surface includes build tools and task runners that accept user-supplied glob arguments (ESLint, Webpack, Rollup config), multi-tenant systems where one tenant configures glob-based rules that run in a shared process, admin or developer interfaces that accept ignore-rule or filter configuration as globs, and CI/CD pipelines that evaluate user-submitted config files containing glob patterns. An attacker who can place a crafted pattern into any of these paths can stall the Node.js event loop for tens of seconds per invocation. The pattern is 56 bytes for a 5-second stall and does not require authentication in contexts where pattern input is part of the feature. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3 fix the issue."
+              },
+              "properties": {
+                "cvssv3_baseScore": 7.5,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "precision": "very-high",
+                "security-severity": "7.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2026-27904",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "minimatch: Minimatch: Denial of Service via catastrophic backtracking in glob expressions"
+              },
+              "fullDescription": {
+                "text": "minimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4, nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an 18-byte non-matching input, `minimatch()` stalls for over 7 seconds. Adding a single nesting level or a few input characters pushes this to minutes. This is the most severe finding: it is triggered by the default `minimatch()` API with no special options, and the minimum viable pattern is only 12 bytes. The same issue affects `+()` extglobs equally. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4 fix the issue."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2026-27904",
+              "help": {
+                "text": "Vulnerability CVE-2026-27904\nSeverity: HIGH\nPackage: minimatch\nFixed Version: 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.4\nLink: [CVE-2026-27904](https://avd.aquasec.com/nvd/cve-2026-27904)\nminimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4, nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an 18-byte non-matching input, `minimatch()` stalls for over 7 seconds. Adding a single nesting level or a few input characters pushes this to minutes. This is the most severe finding: it is triggered by the default `minimatch()` API with no special options, and the minimum viable pattern is only 12 bytes. The same issue affects `+()` extglobs equally. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4 fix the issue.",
+                "markdown": "**Vulnerability CVE-2026-27904**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|minimatch|10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.4|[CVE-2026-27904](https://avd.aquasec.com/nvd/cve-2026-27904)|\n\nminimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4, nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an 18-byte non-matching input, `minimatch()` stalls for over 7 seconds. Adding a single nesting level or a few input characters pushes this to minutes. This is the most severe finding: it is triggered by the default `minimatch()` API with no special options, and the minimum viable pattern is only 12 bytes. The same issue affects `+()` extglobs equally. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4 fix the issue."
+              },
+              "properties": {
+                "cvssv3_baseScore": 7.5,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "precision": "very-high",
+                "security-severity": "7.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2026-4867",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "path-to-regexp: path-to-regexp: Denial of Service via catastrophic backtracking from malformed URL parameters"
+              },
+              "fullDescription": {
+                "text": "Impact:\n\nA bad regular expression is generated any time you have three or more parameters within a single segment, separated by something that is not a period (.). For example, /:a-:b-:c or /:a-:b-:c-:d. The backtrack protection added in path-to-regexp@0.1.12 only prevents ambiguity for two parameters. With three or more, the generated lookahead does not block single separator characters, so capture groups overlap and cause catastrophic backtracking.\n\nPatches:\n\nUpgrade to path-to-regexp@0.1.13\n\nCustom regex patterns in route definitions (e.g., /:a-:b([^-/]+)-:c([^-/]+)) are not affected because they override the default capture group.\n\nWorkarounds:\n\nAll versions can be patched by providing a custom regular expression for parameters after the first in a single segment. As long as the custom regular expression does not match the text before the parameter, you will be safe. For example, change /:a-:b-:c to /:a-:b([^-/]+)-:c([^-/]+).\n\nIf paths cannot be rewritten and versions cannot be upgraded, another alternative is to limit the URL length."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2026-4867",
+              "help": {
+                "text": "Vulnerability CVE-2026-4867\nSeverity: HIGH\nPackage: path-to-regexp\nFixed Version: 0.1.13\nLink: [CVE-2026-4867](https://avd.aquasec.com/nvd/cve-2026-4867)\nImpact:\n\nA bad regular expression is generated any time you have three or more parameters within a single segment, separated by something that is not a period (.). For example, /:a-:b-:c or /:a-:b-:c-:d. The backtrack protection added in path-to-regexp@0.1.12 only prevents ambiguity for two parameters. With three or more, the generated lookahead does not block single separator characters, so capture groups overlap and cause catastrophic backtracking.\n\nPatches:\n\nUpgrade to path-to-regexp@0.1.13\n\nCustom regex patterns in route definitions (e.g., /:a-:b([^-/]+)-:c([^-/]+)) are not affected because they override the default capture group.\n\nWorkarounds:\n\nAll versions can be patched by providing a custom regular expression for parameters after the first in a single segment. As long as the custom regular expression does not match the text before the parameter, you will be safe. For example, change /:a-:b-:c to /:a-:b([^-/]+)-:c([^-/]+).\n\nIf paths cannot be rewritten and versions cannot be upgraded, another alternative is to limit the URL length.",
+                "markdown": "**Vulnerability CVE-2026-4867**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|HIGH|path-to-regexp|0.1.13|[CVE-2026-4867](https://avd.aquasec.com/nvd/cve-2026-4867)|\n\nImpact:\n\nA bad regular expression is generated any time you have three or more parameters within a single segment, separated by something that is not a period (.). For example, /:a-:b-:c or /:a-:b-:c-:d. The backtrack protection added in path-to-regexp@0.1.12 only prevents ambiguity for two parameters. With three or more, the generated lookahead does not block single separator characters, so capture groups overlap and cause catastrophic backtracking.\n\nPatches:\n\nUpgrade to path-to-regexp@0.1.13\n\nCustom regex patterns in route definitions (e.g., /:a-:b([^-/]+)-:c([^-/]+)) are not affected because they override the default capture group.\n\nWorkarounds:\n\nAll versions can be patched by providing a custom regular expression for parameters after the first in a single segment. As long as the custom regular expression does not match the text before the parameter, you will be safe. For example, change /:a-:b-:c to /:a-:b([^-/]+)-:c([^-/]+).\n\nIf paths cannot be rewritten and versions cannot be upgraded, another alternative is to limit the URL length."
+              },
+              "properties": {
+                "cvssv3_baseScore": 7.5,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+                "precision": "very-high",
+                "security-severity": "7.5",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "HIGH"
+                ]
+              }
+            },
+            {
+              "id": "CVE-2026-2391",
+              "name": "LanguageSpecificPackageVulnerability",
+              "shortDescription": {
+                "text": "qs: qs's arrayLimit bypass in comma parsing allows denial of service"
+              },
+              "fullDescription": {
+                "text": "### Summary\nThe `arrayLimit` option in qs does not enforce limits for comma-separated values when `comma: true` is enabled, allowing attackers to cause denial-of-service via memory exhaustion. This is a bypass of the array limit enforcement, similar to the bracket notation bypass addressed in GHSA-6rw7-vpxm-498p (CVE-2025-15284).\n\n### Details\nWhen the `comma` option is set to `true` (not the default, but configurable in applications), qs allows parsing comma-separated strings as arrays (e.g., `?param=a,b,c` becomes `['a', 'b', 'c']`). However, the limit check for `arrayLimit` (default: 20) and the optional throwOnLimitExceeded occur after the comma-handling logic in `parseArrayValue`, enabling a bypass. This permits creation of arbitrarily large arrays from a single parameter, leading to excessive memory allocation.\n\n**Vulnerable code** (lib/parse.js: lines ~40-50):\n```js\nif (val \u0026\u0026 typeof val === 'string' \u0026\u0026 options.comma \u0026\u0026 val.indexOf(',') \u003e -1) {\n    return val.split(',');\n}\n\nif (options.throwOnLimitExceeded \u0026\u0026 currentArrayLength \u003e= options.arrayLimit) {\n    throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');\n}\n\nreturn val;\n```\nThe `split(',')` returns the array immediately, skipping the subsequent limit check. Downstream merging via `utils.combine` does not prevent allocation, even if it marks overflows for sparse arrays.This discrepancy allows attackers to send a single parameter with millions of commas (e.g., `?param=,,,,,,,,...`), allocating massive arrays in memory without triggering limits. It bypasses the intent of `arrayLimit`, which is enforced correctly for indexed (`a[0]=`) and bracket (`a[]=`) notations (the latter fixed in v6.14.1 per GHSA-6rw7-vpxm-498p).\n\n### PoC\n**Test 1 - Basic bypass:**\n```\nnpm install qs\n```\n\n```js\nconst qs = require('qs');\n\nconst payload = 'a=' + ','.repeat(25);  // 26 elements after split (bypasses arrayLimit: 5)\nconst options = { comma: true, arrayLimit: 5, throwOnLimitExceeded: true };\n\ntry {\n  const result = qs.parse(payload, options);\n  console.log(result.a.length);  // Outputs: 26 (bypass successful)\n} catch (e) {\n  console.log('Limit enforced:', e.message);  // Not thrown\n}\n```\n**Configuration:**\n- `comma: true`\n- `arrayLimit: 5`\n- `throwOnLimitExceeded: true`\n\nExpected: Throws \"Array limit exceeded\" error.\nActual: Parses successfully, creating an array of length 26.\n\n\n### Impact\nDenial of Service (DoS) via memory exhaustion."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "helpUri": "https://avd.aquasec.com/nvd/cve-2026-2391",
+              "help": {
+                "text": "Vulnerability CVE-2026-2391\nSeverity: LOW\nPackage: qs\nFixed Version: 6.14.2\nLink: [CVE-2026-2391](https://avd.aquasec.com/nvd/cve-2026-2391)\n### Summary\nThe `arrayLimit` option in qs does not enforce limits for comma-separated values when `comma: true` is enabled, allowing attackers to cause denial-of-service via memory exhaustion. This is a bypass of the array limit enforcement, similar to the bracket notation bypass addressed in GHSA-6rw7-vpxm-498p (CVE-2025-15284).\n\n### Details\nWhen the `comma` option is set to `true` (not the default, but configurable in applications), qs allows parsing comma-separated strings as arrays (e.g., `?param=a,b,c` becomes `['a', 'b', 'c']`). However, the limit check for `arrayLimit` (default: 20) and the optional throwOnLimitExceeded occur after the comma-handling logic in `parseArrayValue`, enabling a bypass. This permits creation of arbitrarily large arrays from a single parameter, leading to excessive memory allocation.\n\n**Vulnerable code** (lib/parse.js: lines ~40-50):\n```js\nif (val \u0026\u0026 typeof val === 'string' \u0026\u0026 options.comma \u0026\u0026 val.indexOf(',') \u003e -1) {\n    return val.split(',');\n}\n\nif (options.throwOnLimitExceeded \u0026\u0026 currentArrayLength \u003e= options.arrayLimit) {\n    throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');\n}\n\nreturn val;\n```\nThe `split(',')` returns the array immediately, skipping the subsequent limit check. Downstream merging via `utils.combine` does not prevent allocation, even if it marks overflows for sparse arrays.This discrepancy allows attackers to send a single parameter with millions of commas (e.g., `?param=,,,,,,,,...`), allocating massive arrays in memory without triggering limits. It bypasses the intent of `arrayLimit`, which is enforced correctly for indexed (`a[0]=`) and bracket (`a[]=`) notations (the latter fixed in v6.14.1 per GHSA-6rw7-vpxm-498p).\n\n### PoC\n**Test 1 - Basic bypass:**\n```\nnpm install qs\n```\n\n```js\nconst qs = require('qs');\n\nconst payload = 'a=' + ','.repeat(25);  // 26 elements after split (bypasses arrayLimit: 5)\nconst options = { comma: true, arrayLimit: 5, throwOnLimitExceeded: true };\n\ntry {\n  const result = qs.parse(payload, options);\n  console.log(result.a.length);  // Outputs: 26 (bypass successful)\n} catch (e) {\n  console.log('Limit enforced:', e.message);  // Not thrown\n}\n```\n**Configuration:**\n- `comma: true`\n- `arrayLimit: 5`\n- `throwOnLimitExceeded: true`\n\nExpected: Throws \"Array limit exceeded\" error.\nActual: Parses successfully, creating an array of length 26.\n\n\n### Impact\nDenial of Service (DoS) via memory exhaustion.",
+                "markdown": "**Vulnerability CVE-2026-2391**\n| Severity | Package | Fixed Version | Link |\n| --- | --- | --- | --- |\n|LOW|qs|6.14.2|[CVE-2026-2391](https://avd.aquasec.com/nvd/cve-2026-2391)|\n\n### Summary\nThe `arrayLimit` option in qs does not enforce limits for comma-separated values when `comma: true` is enabled, allowing attackers to cause denial-of-service via memory exhaustion. This is a bypass of the array limit enforcement, similar to the bracket notation bypass addressed in GHSA-6rw7-vpxm-498p (CVE-2025-15284).\n\n### Details\nWhen the `comma` option is set to `true` (not the default, but configurable in applications), qs allows parsing comma-separated strings as arrays (e.g., `?param=a,b,c` becomes `['a', 'b', 'c']`). However, the limit check for `arrayLimit` (default: 20) and the optional throwOnLimitExceeded occur after the comma-handling logic in `parseArrayValue`, enabling a bypass. This permits creation of arbitrarily large arrays from a single parameter, leading to excessive memory allocation.\n\n**Vulnerable code** (lib/parse.js: lines ~40-50):\n```js\nif (val \u0026\u0026 typeof val === 'string' \u0026\u0026 options.comma \u0026\u0026 val.indexOf(',') \u003e -1) {\n    return val.split(',');\n}\n\nif (options.throwOnLimitExceeded \u0026\u0026 currentArrayLength \u003e= options.arrayLimit) {\n    throw new RangeError('Array limit exceeded. Only ' + options.arrayLimit + ' element' + (options.arrayLimit === 1 ? '' : 's') + ' allowed in an array.');\n}\n\nreturn val;\n```\nThe `split(',')` returns the array immediately, skipping the subsequent limit check. Downstream merging via `utils.combine` does not prevent allocation, even if it marks overflows for sparse arrays.This discrepancy allows attackers to send a single parameter with millions of commas (e.g., `?param=,,,,,,,,...`), allocating massive arrays in memory without triggering limits. It bypasses the intent of `arrayLimit`, which is enforced correctly for indexed (`a[0]=`) and bracket (`a[]=`) notations (the latter fixed in v6.14.1 per GHSA-6rw7-vpxm-498p).\n\n### PoC\n**Test 1 - Basic bypass:**\n```\nnpm install qs\n```\n\n```js\nconst qs = require('qs');\n\nconst payload = 'a=' + ','.repeat(25);  // 26 elements after split (bypasses arrayLimit: 5)\nconst options = { comma: true, arrayLimit: 5, throwOnLimitExceeded: true };\n\ntry {\n  const result = qs.parse(payload, options);\n  console.log(result.a.length);  // Outputs: 26 (bypass successful)\n} catch (e) {\n  console.log('Limit enforced:', e.message);  // Not thrown\n}\n```\n**Configuration:**\n- `comma: true`\n- `arrayLimit: 5`\n- `throwOnLimitExceeded: true`\n\nExpected: Throws \"Array limit exceeded\" error.\nActual: Parses successfully, creating an array of length 26.\n\n\n### Impact\nDenial of Service (DoS) via memory exhaustion."
+              },
+              "properties": {
+                "cvssv3_baseScore": 3.7,
+                "cvssv3_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+                "precision": "very-high",
+                "security-severity": "3.7",
+                "tags": [
+                  "vulnerability",
+                  "security",
+                  "LOW"
+                ]
+              }
+            }
+          ],
+          "version": "0.69.3"
+        }
+      },
+      "results": [
+        {
+          "ruleId": "CVE-2026-33750",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "Package: brace-expansion\nInstalled Version: 2.0.2\nVulnerability CVE-2026-33750\nSeverity: MEDIUM\nFixed Version: 5.0.5, 3.0.2, 2.0.3, 1.1.13\nLink: [CVE-2026-33750](https://avd.aquasec.com/nvd/cve-2026-33750)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 2222,
+                  "startColumn": 1,
+                  "endLine": 2230,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: brace-expansion@2.0.2"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2026-26996",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Package: minimatch\nInstalled Version: 5.1.6\nVulnerability CVE-2026-26996\nSeverity: HIGH\nFixed Version: 10.2.1, 9.0.6, 8.0.5, 7.4.7, 6.2.1, 5.1.7, 4.2.4, 3.1.3\nLink: [CVE-2026-26996](https://avd.aquasec.com/nvd/cve-2026-26996)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 2231,
+                  "startColumn": 1,
+                  "endLine": 2242,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: minimatch@5.1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2026-27903",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Package: minimatch\nInstalled Version: 5.1.6\nVulnerability CVE-2026-27903\nSeverity: HIGH\nFixed Version: 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.3\nLink: [CVE-2026-27903](https://avd.aquasec.com/nvd/cve-2026-27903)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 2231,
+                  "startColumn": 1,
+                  "endLine": 2242,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: minimatch@5.1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2026-27904",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Package: minimatch\nInstalled Version: 5.1.6\nVulnerability CVE-2026-27904\nSeverity: HIGH\nFixed Version: 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.4\nLink: [CVE-2026-27904](https://avd.aquasec.com/nvd/cve-2026-27904)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 2231,
+                  "startColumn": 1,
+                  "endLine": 2242,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: minimatch@5.1.6"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2026-4867",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Package: path-to-regexp\nInstalled Version: 0.1.12\nVulnerability CVE-2026-4867\nSeverity: HIGH\nFixed Version: 0.1.13\nLink: [CVE-2026-4867](https://avd.aquasec.com/nvd/cve-2026-4867)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 4102,
+                  "startColumn": 1,
+                  "endLine": 4107,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: path-to-regexp@0.1.12"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "CVE-2026-2391",
+          "ruleIndex": 5,
+          "level": "note",
+          "message": {
+            "text": "Package: qs\nInstalled Version: 6.14.1\nVulnerability CVE-2026-2391\nSeverity: LOW\nFixed Version: 6.14.2\nLink: [CVE-2026-2391](https://avd.aquasec.com/nvd/cve-2026-2391)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "package-lock.json",
+                  "uriBaseId": "ROOTPATH"
+                },
+                "region": {
+                  "startLine": 4357,
+                  "startColumn": 1,
+                  "endLine": 4371,
+                  "endColumn": 1
+                }
+              },
+              "message": {
+                "text": "package-lock.json: qs@6.14.1"
+              }
+            }
+          ]
+        }
+      ],
+      "columnKind": "utf16CodeUnits",
+      "originalUriBaseIds": {
+        "ROOTPATH": {
+          "uri": "file:///"
+        }
+      }
+    }
+  ]
+}
