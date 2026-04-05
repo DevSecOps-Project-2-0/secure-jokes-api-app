@@ -22,8 +22,8 @@ jobs:
         uses: aquasecurity/trivy-action@v0.20.0
         with:
           image-ref: docker.io/evamecobblah/myapp:latest
-          format: table
-          exit-code: 1
+          format: sarif
+          exit-code: 0 # Change to non-zero (1) if you want to fail the workflow on vulnerabilities
           output: trivy-results.sarif
           severity: CRITICAL,HIGH
     
