@@ -5,6 +5,11 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  security-events: write # Required for uploading SARIF files
+
+
 jobs:
   trivy-scan:
     runs-on: ubuntu-latest
@@ -19,12 +24,10 @@ jobs:
           image-ref: docker.io/evamecobblah/myapp:latest
           format: table
           exit-code: 1
-          output: trivy-results.json
+          output: trivy-results.sarif
           severity: CRITICAL,HIGH
     
-      - name: Upload Trivy scan results
-        uses: actions/upload-artifact@v3
-        if: always()
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          name: trivy-results
-          path: trivy-results.json
+          sarif_file: 'trivy-results.sarif'
