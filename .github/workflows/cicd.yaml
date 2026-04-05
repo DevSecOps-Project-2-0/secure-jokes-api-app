@@ -19,14 +19,11 @@ jobs:
           image-ref: docker.io/evamecobblah/myapp:latest
           format: table
           exit-code: 1
-          output: trivy-results.json
+          output: trivy-results.sarif
           severity: CRITICAL,HIGH
-
-      - name: Upload Trivy results
-        uses: actions/upload-artifact@v3
+    
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v2
         if: always()
         with:
-          name: trivy-results
-          path: trivy-results.json
-    
-
+          sarif_file: 'trivy-results.sarif'
