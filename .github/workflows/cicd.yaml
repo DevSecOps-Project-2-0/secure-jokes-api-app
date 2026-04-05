@@ -21,3 +21,12 @@ jobs:
           exit-code: 1
           output: trivy-results.json
           severity: CRITICAL,HIGH
+
+      - name: Upload Trivy results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: trivy-results
+          path: trivy-results.json
+    
+
