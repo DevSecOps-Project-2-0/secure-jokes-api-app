@@ -18,5 +18,6 @@ jobs:
         with:
           image-ref: docker.io/evamecobblah/myapp:latest
           format: table
-          exit-code: 0
+          exit-code: 1
+          output: trivy-results.json
           severity: CRITICAL,HIGH
